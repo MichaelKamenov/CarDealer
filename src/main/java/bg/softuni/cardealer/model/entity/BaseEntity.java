@@ -1,4 +1,4 @@
-package bg.softuni.cardealer.model;
+package bg.softuni.cardealer.model.entity;
 
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
