@@ -1,4 +1,4 @@
-package bg.softuni.cardealer.web;
+package bg.softuni.cardealer.web.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
