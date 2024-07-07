@@ -69,6 +69,8 @@ public class User extends BaseEntity {
         this.roles = roles;
     }
 
+
+
     @Override
     public String toString() {
         return "User{" +
