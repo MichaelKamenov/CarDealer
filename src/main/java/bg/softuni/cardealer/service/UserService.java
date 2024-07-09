@@ -4,5 +4,5 @@ import bg.softuni.cardealer.model.dto.UserRegisterDto;
 
 public interface UserService {
 
-    void registerUser(UserRegisterDto userRegisterDto);
+    boolean registerUser(UserRegisterDto userRegisterDto);
 }
