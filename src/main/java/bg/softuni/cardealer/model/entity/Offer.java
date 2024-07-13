@@ -15,9 +15,9 @@ public class Offer extends BaseEntity{
     @Positive
     private Integer mileage;
 
-    @Column
-    @Positive
-    private int price;
+    //@Column
+    //@Positive
+    //private int price;
 
     @Enumerated(EnumType.STRING)
     private EngineType engine;
@@ -35,32 +35,31 @@ public class Offer extends BaseEntity{
         return description;
     }
 
-    public void setDescription(String description) {
+    public Offer setDescription(String description) {
         this.description = description;
+        return this;
     }
 
     public Integer getMileage() {
         return mileage;
     }
 
-    public void setMileage(Integer mileage) {
+    public Offer setMileage(Integer mileage) {
         this.mileage = mileage;
+        return this;
     }
 
-    public int getPrice() {
-        return price;
-    }
 
-    public void setPrice(int price) {
-        this.price = price;
-    }
+
+
 
     public EngineType getEngine() {
         return engine;
     }
 
-    public void setEngine(EngineType engine) {
+    public Offer setEngine(EngineType engine) {
         this.engine = engine;
+        return this;
     }
 
     public Vehicle getVehicle() {
