@@ -15,9 +15,9 @@ public class Offer extends BaseEntity{
     @Positive
     private Integer mileage;
 
-    //@Column
-    //@Positive
-    //private int price;
+    @Column
+    @Positive
+    private int price;
 
     @Enumerated(EnumType.STRING)
     private EngineType engine;
@@ -49,9 +49,14 @@ public class Offer extends BaseEntity{
         return this;
     }
 
+    public int getPrice() {
+        return price;
+    }
 
-
-
+    public Offer setPrice(int price) {
+        this.price = price;
+        return this;
+    }
 
     public EngineType getEngine() {
         return engine;
