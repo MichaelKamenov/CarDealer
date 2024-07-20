@@ -11,6 +11,9 @@ spring:
     hidden-method:
       filter:
         enabled: 'true'
+  sql:
+    init:
+      mode: never
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
     username: ${db_username}

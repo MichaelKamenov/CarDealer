@@ -19,38 +19,41 @@ public class UserRegisterDto {
     @Size(min = 2, max = 40)
     private String password;
 
-    public UserRegisterDto() {
-    }
+   public UserRegisterDto() {}
 
     public String getFirstName() {
         return firstName;
     }
 
-    public void setFirstName(String firstName) {
+    public UserRegisterDto setFirstName(String firstName) {
         this.firstName = firstName;
+        return this;
     }
 
     public String getLastName() {
         return lastName;
     }
 
-    public void setLastName(String lastName) {
+    public UserRegisterDto setLastName(String lastName) {
         this.lastName = lastName;
+        return this;
     }
 
     public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
+    public UserRegisterDto setEmail(String email) {
         this.email = email;
+        return this;
     }
 
     public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
+    public UserRegisterDto setPassword(String password) {
         this.password = password;
+        return this;
     }
 }

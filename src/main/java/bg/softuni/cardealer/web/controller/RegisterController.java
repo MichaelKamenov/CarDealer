@@ -8,9 +8,11 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
+@RequestMapping("/users")
 public class RegisterController {
 
     private final UserService userService;
@@ -19,7 +21,7 @@ public class RegisterController {
         this.userService = userService;
     }
 
-    @ModelAttribute("registerData")
+    @ModelAttribute("registerDto")
     public UserRegisterDto userRegisterDto(){
         return new UserRegisterDto();
     }
@@ -29,24 +31,10 @@ public class RegisterController {
         return "auth-register";
     }
 
-    @PostMapping("/users/register")
-    public String doRegister(@Valid UserRegisterDto userData,
-                             BindingResult bindingResult,
-                             RedirectAttributes redirectAttributes){
+    @PostMapping("/register")
+    public String register(UserRegisterDto userData){
+        userService.registerUser(userData);
 
-        if(bindingResult.hasErrors()){
-            redirectAttributes.addFlashAttribute("registerData", userData);
-            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.registerData", bindingResult);
-
-            return "redirect:/register";
-
-        }
-
-        boolean success = userService.registerUser(userData);
-        if(!success){
-            return "redirect:/auth-register";
-        }
-
-        return "redirect:/users/login";
+        return "redirect:/";
     }
 }

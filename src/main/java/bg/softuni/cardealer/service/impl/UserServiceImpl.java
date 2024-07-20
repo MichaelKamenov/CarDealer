@@ -1,14 +1,12 @@
 package bg.softuni.cardealer.service.impl;
 
 import bg.softuni.cardealer.model.dto.UserRegisterDto;
-import bg.softuni.cardealer.model.entity.User;
+import bg.softuni.cardealer.model.entity.UserEntity;
 import bg.softuni.cardealer.repository.UserRepository;
 import bg.softuni.cardealer.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -24,19 +22,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean registerUser(UserRegisterDto userRegisterDto) {
-        Optional<User> byEmail = userRepository.findByEmail(userRegisterDto.getEmail());
-        if(byEmail.isPresent()){
-            return false;
-        }
-        User user = new User();
+    public void registerUser(UserRegisterDto userRegisterDto) {
+        userRepository.save(map(userRegisterDto));
+    }
 
-        user.setFirstName(userRegisterDto.getFirstName());
-        user.setLastName(userRegisterDto.getLastName());
-        user.setEmail(userRegisterDto.getEmail());
-        user.setPassword(passwordEncoder.encode(userRegisterDto.getPassword()));
-
-        this.userRepository.save(user);
-        return true;
+    private UserEntity map(UserRegisterDto userRegisterDto){
+        UserEntity userEntity = modelMapper.map(userRegisterDto, UserEntity.class);
+        userEntity.setPassword(passwordEncoder.encode(userRegisterDto.getPassword()));
+        return userEntity;
     }
 }

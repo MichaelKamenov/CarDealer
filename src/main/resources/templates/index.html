@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
 
 <head>
     <meta charset="UTF-8">
@@ -12,10 +14,12 @@
 </head>
 
 <body>
-<div th:replace="~{fragments/navbar::navbar(activeLink=${'index'})}"></div>
+<div th:replace="~{fragments/navbar::navbar(activeLink=${'home'})}"></div>
 
 <div class="container-fluid">
-    <h5 class="text-center text-white mt-5">Welcome to Car Dealer</h5>
+    <h5 class="text-center text-white mt-5">Welcome to Car Dealer,
+        <th:block th:text="${welcomeMsg}"></th:block>!
+    </h5>
 </div>
 
 <div>

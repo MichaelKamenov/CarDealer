@@ -24,10 +24,10 @@ public class Vehicle extends BaseEntity{
     @OneToOne(mappedBy = "vehicle")
     private Offer offer;
 
-    @ManyToOne(targetEntity = User.class, fetch = FetchType.EAGER)
+    @ManyToOne(targetEntity = UserEntity.class, fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id",
     referencedColumnName = "id")
-    private User user;
+    private UserEntity userEntity;
 
     public Vehicle() {
     }
@@ -80,11 +80,11 @@ public class Vehicle extends BaseEntity{
         this.offer = offer;
     }
 
-    public User getUser() {
-        return user;
+    public UserEntity getUser() {
+        return userEntity;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUser(UserEntity userEntity) {
+        this.userEntity = userEntity;
     }
 }
