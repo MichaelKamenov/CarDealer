@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface OfferService {
 
-    long createOffer(AddOfferDto addOfferDto);
+    void createOffer(AddOfferDto addOfferDto);
 
     OfferDetailsDto getOfferDetails(Long id);
 

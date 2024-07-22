@@ -6,7 +6,11 @@ import bg.softuni.cardealer.model.dto.OfferSummaryDto;
 import bg.softuni.cardealer.model.entity.Offer;
 import bg.softuni.cardealer.repository.OfferRepository;
 import bg.softuni.cardealer.service.OfferService;
+import bg.softuni.cardealer.service.exception.ObjectNotFoundException;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestClient;
 
 import java.util.List;
 
@@ -14,29 +18,37 @@ import java.util.List;
 public class OfferServiceImpl implements OfferService {
 
     private final OfferRepository offerRepository;
+    private final RestClient offerRestClient;
 
-    public OfferServiceImpl(OfferRepository offerRepository) {
+    public OfferServiceImpl(OfferRepository offerRepository, RestClient offerRestClient) {
         this.offerRepository = offerRepository;
+        this.offerRestClient = offerRestClient;
     }
 
     @Override
-    public long createOffer(AddOfferDto addOfferDto) {
-        return offerRepository.save(map(addOfferDto)).getId();
+    public void createOffer(AddOfferDto addOfferDto) {
+        offerRestClient.post()
+                .uri("http://localhost:8081/offers")
+                .body(addOfferDto)
+                .retrieve();
     }
 
     @Override
     public OfferDetailsDto getOfferDetails(Long id) {
-        return this.offerRepository.findById(id)
-                .map(OfferServiceImpl::offerDetails)
-                .orElseThrow();
+        return offerRestClient.post()
+                .uri("http://localhost:8081/offers/{id}", id)
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .body(OfferDetailsDto.class);
     }
 
     @Override
     public List<OfferSummaryDto> getAllOffers() {
-        return offerRepository.findAll()
-                .stream()
-                .map(OfferServiceImpl::offerSummaryDto)
-                .toList();
+        return offerRestClient.post()
+                .uri("http://localhost:8081/offers")
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .body(new ParameterizedTypeReference<>(){});
     }
 
     @Override

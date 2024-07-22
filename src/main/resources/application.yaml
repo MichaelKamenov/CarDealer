@@ -30,3 +30,7 @@ logging:
     blog: WARN
 server:
   port: 8080
+
+offers:
+  api:
+    baseUrl: "http://localhost:8081"

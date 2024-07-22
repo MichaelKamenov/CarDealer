@@ -3,11 +3,14 @@ package bg.softuni.cardealer.web.controller;
 import bg.softuni.cardealer.model.dto.AddOfferDto;
 import bg.softuni.cardealer.model.enums.EngineType;
 import bg.softuni.cardealer.service.OfferService;
+import bg.softuni.cardealer.service.exception.ObjectNotFoundException;
 import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
@@ -44,8 +47,8 @@ public class OfferController {
             return "redirect:/offers/add";
         }
 
-        long offer = offerService.createOffer(addOfferDto);
-        return "redirect:/offers/" + offer;
+        offerService.createOffer(addOfferDto);
+        return "redirect:/offers/all";
     }
 
     @GetMapping("/offers/{id}")
@@ -54,6 +57,15 @@ public class OfferController {
 
 
         return "details";
+    }
+
+    @ResponseStatus(code = HttpStatus.NOT_FOUND)
+    @ExceptionHandler(ObjectNotFoundException.class)
+    public ModelAndView ObjectNotFound(ObjectNotFoundException notFoundException){
+        ModelAndView modelAndView = new ModelAndView("offer-not-found");
+        modelAndView.addObject("offerId", notFoundException.getId());
+
+        return modelAndView;
     }
 
     @DeleteMapping("/offers/{id}")

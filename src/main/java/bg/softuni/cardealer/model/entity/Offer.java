@@ -22,12 +22,6 @@ public class Offer extends BaseEntity{
     @Enumerated(EnumType.STRING)
     private EngineType engine;
 
-
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "vehicle_id",
-    referencedColumnName = "id")
-    private Vehicle vehicle;
-
     public Offer() {
     }
 
@@ -65,13 +59,5 @@ public class Offer extends BaseEntity{
     public Offer setEngine(EngineType engine) {
         this.engine = engine;
         return this;
-    }
-
-    public Vehicle getVehicle() {
-        return vehicle;
-    }
-
-    public void setVehicle(Vehicle vehicle) {
-        this.vehicle = vehicle;
     }
 }
