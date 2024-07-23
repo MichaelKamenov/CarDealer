@@ -20,7 +20,7 @@ public class OffersController {
     @GetMapping("/all")
     public String getAllOffers(Model model){
         model.addAttribute("allOffers", offerService.getAllOffers());
-        return "offers";
+        return "/offers";
     }
 
 

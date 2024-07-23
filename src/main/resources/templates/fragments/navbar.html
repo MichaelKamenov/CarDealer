@@ -24,13 +24,19 @@
             <ul class="navbar-nav mr-auto col-12 justify-content-between">
                 <li class="nav-item"
                 >
-                    <a class="nav-link" href="/brands/all" th:classappend="${activeLink == 'all-brands'}? 'active'">All Brands</a>
+                    <a class="nav-link" href="/brands/all" th:classappend="${activeLink == 'all-brands'}? 'active'"
+                       th:text="#{nav_bar_all_brands}"
+                    >All Brands</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/offers/add}" th:classappend="${activeLink == 'add-offer'}? 'active'">Add Offer</a>
+                    <a class="nav-link" th:href="@{/offers/add}" th:classappend="${activeLink == 'add-offer'}? 'active'"
+                       th:text="#{nav_bar_add_offer}"
+                    >Add Offer</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/offers/all" th:classappend="${activeLink == 'all-offers'}? 'active'">All Offers</a>
+                    <a class="nav-link" href="/offers/all" th:classappend="${activeLink == 'all-offers'}? 'active'"
+                       th:text="#{nav_bar_all_offers}"
+                    >All Offers</a>
                 </li>
                 <li class="nav-item dropdown" sec:authorize="hasRole('ADMIN')">
                     <a class="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button"
@@ -56,12 +62,28 @@
                 </li>
 
                 <li class="nav-item" sec:authorize="!isAuthenticated()">
-                    <a class="nav-link" th:href="@{/users/register}" th:classappend="${activeLink == 'register'}? 'active'">Register</a>
+                    <a class="nav-link" th:href="@{/users/register}" th:classappend="${activeLink == 'register'}? 'active'"
+                       th:text="#{nav_bar_register}"
+                    >Register</a>
                 </li>
                 <li class="nav-item" sec:authorize="!isAuthenticated()">
-                    <a class="nav-link" th:href="@{/users/login}" th:classappend="${activeLink == 'login'}? 'active'">Login</a>
+                    <a class="nav-link" th:href="@{/users/login}" th:classappend="${activeLink == 'login'}? 'active'"
+                       th:text="#{nav_bar_login}"
+                    >Login</a>
                 </li>
 
+                <li class="nav-item">
+                    <form th:method="GET">
+                        <label class="text-white" for="lang" th:text="#{nav_bar_language}">Language</label>
+                        <select
+                                id="lang"
+                                name="lang"
+                                onchange="this.form.submit()">
+                            <option value="en_US" th:selected="${#locale.toString()} == 'en_US'">English</option>
+                            <option value="bg_Bg" th:selected="${#locale.toString()} == 'bg_BG'">Български</option>
+                        </select>
+                    </form>
+                </li>
             </ul>
         </div>
     </nav>

@@ -44,7 +44,7 @@ public class OfferServiceImpl implements OfferService {
 
     @Override
     public List<OfferSummaryDto> getAllOffers() {
-        return offerRestClient.post()
+        return offerRestClient.get()
                 .uri("http://localhost:8081/offers")
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
